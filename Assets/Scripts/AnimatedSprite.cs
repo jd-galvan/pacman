@@ -1,57 +1,83 @@
+using RTT_Time = System.Int64;
+using HRT_Time = System.Int64;
+
 using UnityEngine;
 
+[RequireComponent(typeof(RTDESKEntity))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class AnimatedSprite : MonoBehaviour
 {
-    public Sprite[] sprites = new Sprite[0];
-    public float animationTime = 0.25f;
-    public bool loop = true;
 
-    private SpriteRenderer spriteRenderer;
-    private int animationFrame;
+  // RTDESK 
+  HRT_Time animationTime;
+  RTDESKEngine engine;
+  SpriteAnimateMsg spriteMsg;
+  // FIN RTDESK 
 
-    private void Awake()
+  public Sprite[] sprites = new Sprite[0];
+  public bool loop = true;
+
+  private SpriteRenderer spriteRenderer;
+  private int animationFrame;
+
+  private void Awake()
+  {
+    spriteRenderer = GetComponent<SpriteRenderer>();
+
+    GetComponent<RTDESKEntity>().MailBox = ReceiveMessage;
+  }
+
+  private void OnEnable()
+  {
+    spriteRenderer.enabled = true;
+  }
+
+  private void OnDisable()
+  {
+    spriteRenderer.enabled = false;
+  }
+
+  private void Start()
+  {
+    // Configuracion para RTDESK
+    engine = GetComponent<RTDESKEntity>().RTDESKEngineScript;
+    spriteMsg = (SpriteAnimateMsg)engine.PopMsg((int)UserMsgTypes.Animation);
+    spriteMsg.spriteRenderer = spriteRenderer;
+
+    animationTime = engine.ms2Ticks(100);
+
+    engine.SendMsg(spriteMsg, gameObject, ReceiveMessage, animationTime);
+  }
+
+  public void Restart()
+  {
+    animationFrame = -1;
+
+    engine.SendMsg(spriteMsg, gameObject, ReceiveMessage, animationTime);
+  }
+
+  void ReceiveMessage(MsgContent Msg)
+  {
+    SpriteAnimateMsg m = (SpriteAnimateMsg)Msg;
+
+    if (!m.spriteRenderer.enabled)
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+      return;
     }
 
-    private void OnEnable()
+    animationFrame++;
+
+    if (animationFrame >= sprites.Length && loop)
     {
-        spriteRenderer.enabled = true;
+      animationFrame = 0;
     }
 
-    private void OnDisable()
+    if (animationFrame >= 0 && animationFrame < sprites.Length)
     {
-        spriteRenderer.enabled = false;
+      m.spriteRenderer.sprite = sprites[animationFrame];
     }
 
-    private void Start()
-    {
-        InvokeRepeating(nameof(Advance), animationTime, animationTime);
-    }
-
-    private void Advance()
-    {
-        if (!spriteRenderer.enabled) {
-            return;
-        }
-
-        animationFrame++;
-
-        if (animationFrame >= sprites.Length && loop) {
-            animationFrame = 0;
-        }
-
-        if (animationFrame >= 0 && animationFrame < sprites.Length) {
-            spriteRenderer.sprite = sprites[animationFrame];
-        }
-    }
-
-    public void Restart()
-    {
-        animationFrame = -1;
-
-        Advance();
-    }
+    engine.SendMsg(m, gameObject, ReceiveMessage, animationTime);
+  }
 
 }
