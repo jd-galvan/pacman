@@ -2,38 +2,56 @@ using UnityEngine;
 
 public class GhostChase : GhostBehavior
 {
-    private void OnDisable()
+
+  private GhostEyes ghostEyesScript;
+
+  void Start()
+  {
+    // Busca el componente GhostEyes en cualquier hijo de Ghost_Blinky
+    ghostEyesScript = GetComponentInChildren<GhostEyes>();
+
+    if (ghostEyesScript != null)
     {
-        ghost.scatter.Enable();
+      Debug.Log("GhostEyes encontrado correctamente en " + ghostEyesScript.gameObject.name);
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
+    else
     {
-        Node node = other.GetComponent<Node>();
+      Debug.LogError("No se encontró el script GhostEyes en los hijos de Ghost_Blinky");
+    }
+  }
+  private void OnDisable()
+  {
+    ghost.scatter.Enable();
+  }
 
-        // Do nothing while the ghost is frightened
-        if (node != null && enabled && !ghost.frightened.enabled)
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    Node node = other.GetComponent<Node>();
+
+    // Do nothing while the ghost is frightened
+    if (node != null && enabled && !ghost.frightened.enabled)
+    {
+      Vector2 direction = Vector2.zero;
+      float minDistance = float.MaxValue;
+
+      // Find the available direction that moves closet to pacman
+      foreach (Vector2 availableDirection in node.availableDirections)
+      {
+        // If the distance in this direction is less than the current
+        // min distance then this direction becomes the new closest
+        Vector3 newPosition = transform.position + new Vector3(availableDirection.x, availableDirection.y);
+        float distance = (ghost.target.position - newPosition).sqrMagnitude;
+
+        if (distance < minDistance)
         {
-            Vector2 direction = Vector2.zero;
-            float minDistance = float.MaxValue;
-
-            // Find the available direction that moves closet to pacman
-            foreach (Vector2 availableDirection in node.availableDirections)
-            {
-                // If the distance in this direction is less than the current
-                // min distance then this direction becomes the new closest
-                Vector3 newPosition = transform.position + new Vector3(availableDirection.x, availableDirection.y);
-                float distance = (ghost.target.position - newPosition).sqrMagnitude;
-
-                if (distance < minDistance)
-                {
-                    direction = availableDirection;
-                    minDistance = distance;
-                }
-            }
-
-            ghost.movement.SetDirection(direction);
+          direction = availableDirection;
+          minDistance = distance;
         }
+      }
+
+      ghost.movement.SetDirection(direction);
     }
+    ghostEyesScript.ChangeEyeDirection();
+  }
 
 }

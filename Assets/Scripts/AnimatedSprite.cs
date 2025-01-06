@@ -44,7 +44,7 @@ public class AnimatedSprite : MonoBehaviour
     spriteMsg = (SpriteAnimateMsg)engine.PopMsg((int)UserMsgTypes.Animation);
     spriteMsg.spriteRenderer = spriteRenderer;
 
-    animationTime = engine.ms2Ticks(100);
+    animationTime = engine.ms2Ticks(80);
 
     engine.SendMsg(spriteMsg, gameObject, ReceiveMessage, animationTime);
   }

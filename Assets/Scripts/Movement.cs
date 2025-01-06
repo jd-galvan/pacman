@@ -86,6 +86,7 @@ public class Movement : MonoBehaviour
     Vector2 translation = speed * speedMultiplier * samplingPeriodSeconds * direction;
 
     rb.MovePosition(m.V2 + translation);
+
     m.V2 = rb.position;
 
     engine.SendMsg(Msg, tenMillis);

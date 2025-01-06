@@ -3,34 +3,47 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class GhostEyes : MonoBehaviour
 {
-    public Sprite up;
-    public Sprite down;
-    public Sprite left;
-    public Sprite right;
 
-    private SpriteRenderer spriteRenderer;
-    private Movement movement;
+  // RTDESK 
+  RTDESKEngine engine;
+  // FIN RTDESK 
+  public Sprite up;
+  public Sprite down;
+  public Sprite left;
+  public Sprite right;
 
-    private void Awake()
+  private SpriteRenderer spriteRenderer;
+  private Movement movement;
+
+  private void Awake()
+  {
+    spriteRenderer = GetComponent<SpriteRenderer>();
+    movement = GetComponentInParent<Movement>();
+  }
+
+  public void Start()
+  {
+    engine = GetComponent<RTDESKEntity>().RTDESKEngineScript;
+  }
+
+  public void ChangeEyeDirection()
+  {
+    if (movement.direction == Vector2.up)
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        movement = GetComponentInParent<Movement>();
+      spriteRenderer.sprite = up;
     }
-
-    private void Update()
+    else if (movement.direction == Vector2.down)
     {
-        if (movement.direction == Vector2.up) {
-            spriteRenderer.sprite = up;
-        }
-        else if (movement.direction == Vector2.down) {
-            spriteRenderer.sprite = down;
-        }
-        else if (movement.direction == Vector2.left) {
-            spriteRenderer.sprite = left;
-        }
-        else if (movement.direction == Vector2.right) {
-            spriteRenderer.sprite = right;
-        }
+      spriteRenderer.sprite = down;
     }
+    else if (movement.direction == Vector2.left)
+    {
+      spriteRenderer.sprite = left;
+    }
+    else if (movement.direction == Vector2.right)
+    {
+      spriteRenderer.sprite = right;
+    }
+  }
 
 }

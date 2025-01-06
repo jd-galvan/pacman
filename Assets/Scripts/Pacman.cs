@@ -3,6 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Movement))]
 public class Pacman : MonoBehaviour
 {
+  // RTDESK 
+  RTDESKEngine engine;
+  // FIN RTDESK 
+
   [SerializeField]
   private AnimatedSprite deathSequence;
   private SpriteRenderer spriteRenderer;
@@ -16,31 +20,17 @@ public class Pacman : MonoBehaviour
     movement = GetComponent<Movement>();
   }
 
-  private void Update()
+  private void Start()
   {
-    // Set the new direction based on the current input
-    if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-    {
-      movement.SetDirection(Vector2.up);
-    }
-    else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-    {
-      movement.SetDirection(Vector2.down);
-    }
-    else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-    {
-      movement.SetDirection(Vector2.left);
-    }
-    else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-    {
-      movement.SetDirection(Vector2.right);
-    }
+    engine = GetComponent<RTDESKEntity>().RTDESKEngineScript;
+    RTDESKInputManager IM = engine.GetInputManager();
 
-    // Rotate pacman to face the movement direction
-    float angle = Mathf.Atan2(movement.direction.y, movement.direction.x);
-    transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
+    //Register keys that we want to be signaled in case the user press them
+    IM.RegisterKeyCode(ReceiveMessage, KeyCode.UpArrow);
+    IM.RegisterKeyCode(ReceiveMessage, KeyCode.DownArrow);
+    IM.RegisterKeyCode(ReceiveMessage, KeyCode.LeftArrow);
+    IM.RegisterKeyCode(ReceiveMessage, KeyCode.RightArrow);
   }
-
   public void ResetState()
   {
     enabled = true;
@@ -53,15 +43,43 @@ public class Pacman : MonoBehaviour
 
   public void DeathSequence()
   {
-    Debug.Log("Estado de movimiento: " + movement.enabled);
     enabled = false;
     spriteRenderer.enabled = false;
     circleCollider.enabled = false;
     movement.enabled = false;
-
     deathSequence.enabled = true;
     deathSequence.Restart();
-    Debug.Log("Estado de movimiento: " + movement.enabled);
+  }
+
+  private void ReceiveMessage(MsgContent Msg)
+  {
+    switch (Msg.Type)
+    {
+      case (int)RTDESKMsgTypes.Input:
+        RTDESKInputMsg IMsg = (RTDESKInputMsg)Msg;
+        switch (IMsg.c)
+        {
+          case KeyCode.UpArrow:
+            movement.SetDirection(Vector2.up);
+            break;
+          case KeyCode.DownArrow:
+            movement.SetDirection(Vector2.down);
+            break;
+          case KeyCode.LeftArrow:
+            movement.SetDirection(Vector2.left);
+            break;
+          case KeyCode.RightArrow:
+            movement.SetDirection(Vector2.right);
+            break;
+          default:
+            break;
+        }
+        float angle = Mathf.Atan2(movement.direction.y, movement.direction.x);
+        transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
+        break;
+      default:
+        break;
+    }
   }
 
 }
