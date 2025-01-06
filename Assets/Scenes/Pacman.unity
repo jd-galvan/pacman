@@ -315,6 +315,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1341531168202294577, guid: 8398b287235293d469d1683369c48531, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1884389399565944624, guid: 8398b287235293d469d1683369c48531, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -411,6 +415,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 994717976}
+    - target: {fileID: 8567915025990468760, guid: 8398b287235293d469d1683369c48531, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094511327578426262, guid: 8398b287235293d469d1683369c48531, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7260817582743894670, guid: 8398b287235293d469d1683369c48531, type: 3}
     m_RemovedGameObjects: []
@@ -540,6 +552,7 @@ GameObject:
   - component: {fileID: 512613667}
   - component: {fileID: 512613669}
   - component: {fileID: 512613668}
+  - component: {fileID: 512613670}
   m_Layer: 9
   m_Name: Passage_Right
   m_TagString: Untagged
@@ -620,6 +633,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &512613670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512613666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524a90fcdc4965948a8da32ee97a788a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RTDESKEngineScript: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,6 +1606,7 @@ GameObject:
   - component: {fileID: 1064051192}
   - component: {fileID: 1064051194}
   - component: {fileID: 1064051193}
+  - component: {fileID: 1064051195}
   m_Layer: 9
   m_Name: Passage_Left
   m_TagString: Untagged
@@ -1660,6 +1687,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1064051195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064051191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524a90fcdc4965948a8da32ee97a788a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RTDESKEngineScript: {fileID: 0}
 --- !u!1 &1133529212
 GameObject:
   m_ObjectHideFlags: 0
@@ -7663,10 +7703,22 @@ PrefabInstance:
       propertyPath: outside
       value: 
       objectReference: {fileID: 918157309}
+    - target: {fileID: 2471418310879639683, guid: 0d1f951e4ac24fe478d688dbf86a5c39, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3070704324441061261, guid: 0d1f951e4ac24fe478d688dbf86a5c39, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3838302860257571699, guid: 0d1f951e4ac24fe478d688dbf86a5c39, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 994717976}
+    - target: {fileID: 5059081642339252522, guid: 0d1f951e4ac24fe478d688dbf86a5c39, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5660416300114475816, guid: 0d1f951e4ac24fe478d688dbf86a5c39, type: 3}
       propertyPath: home
       value: 1
@@ -10544,6 +10596,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1267202687307813028, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1814567404648583842, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
       propertyPath: m_Name
       value: Ghost_Pinky
@@ -10640,6 +10696,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 994717976}
+    - target: {fileID: 8498090248068387085, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9024686446327569923, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7479223627400556315, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
     m_RemovedGameObjects: []
@@ -10936,6 +11000,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6038318316045854526, guid: b6894cca0173e8041bba0e4a8be5fde1, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8277160542397365967, guid: b6894cca0173e8041bba0e4a8be5fde1, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

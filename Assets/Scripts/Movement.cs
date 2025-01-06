@@ -83,20 +83,34 @@ public class Movement : MonoBehaviour
       return;
     }
 
-    if (nextDirection != Vector2.zero)
-    {
-      SetDirection(nextDirection);
-    }
-
     TransformMsg m = (TransformMsg)Msg;
 
-    Vector2 translation = speed * speedMultiplier * samplingPeriodSeconds * direction;
+    switch (Msg.Type)
+    {
+      case (int)UserMsgTypes.Position:
+        rb.MovePosition(m.V2);
+        rb.position = m.V2;
+        engine.PushMsg(Msg);
+        break;
+      case (int)UserMsgTypes.Speed:
+        if (nextDirection != Vector2.zero)
+        {
+          SetDirection(nextDirection);
+        }
+        Vector2 translation = speed * speedMultiplier * samplingPeriodSeconds * direction;
 
-    rb.MovePosition(m.V2 + translation);
+        rb.MovePosition(m.V2 + translation);
 
-    m.V2 = rb.position;
+        m.V2 = rb.position;
 
-    engine.SendMsg(Msg, tenMillis);
+        engine.SendMsg(Msg, tenMillis);
+        break;
+    }
+
+
+
+
+
   }
 
   private void OnEnable()
