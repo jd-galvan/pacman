@@ -52,8 +52,6 @@ public class AnimatedSprite : MonoBehaviour
   public void Restart()
   {
     animationFrame = -1;
-
-    engine.SendMsg(spriteMsg, gameObject, ReceiveMessage, animationTime);
   }
 
   void ReceiveMessage(MsgContent Msg)

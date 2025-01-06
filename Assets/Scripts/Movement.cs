@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
   HRT_Time userTime, tenMillis;
   float samplingPeriodSeconds = 1.0f / 50.0f;
   RTDESKEngine engine;
+  TransformMsg movementMsg;
   // FIN RTDESK 
 
 
@@ -48,7 +49,7 @@ public class Movement : MonoBehaviour
 
     // Configuracion para RTDESK
     engine = GetComponent<RTDESKEntity>().RTDESKEngineScript;
-    TransformMsg movementMsg = (TransformMsg)engine.PopMsg((int)UserMsgTypes.Speed);
+    movementMsg = (TransformMsg)engine.PopMsg((int)UserMsgTypes.Speed);
     movementMsg.V2 = rb.position;
     tenMillis = engine.ms2Ticks(10);
     engine.SendMsg(movementMsg, gameObject, ReceiveMessage, tenMillis);
@@ -56,12 +57,12 @@ public class Movement : MonoBehaviour
 
   public void SetDirection(Vector2 direction, bool forced = false)
   {
-    if (forced || !Occupied(direction)) // Cuando pacman no puede cambiar de direccion por presencia de un bloque
+    if (forced || !Occupied(direction))  // Cambio de direccion 
     {
       this.direction = direction;
       nextDirection = Vector2.zero;
     }
-    else // Cambio de direccion
+    else // Cuando pacman no puede cambiar de direccion por presencia de un bloque
     {
       nextDirection = direction;
     }
@@ -76,6 +77,12 @@ public class Movement : MonoBehaviour
 
   public void ReceiveMessage(MsgContent Msg)
   {
+    if (!this.enabled)
+    {
+      engine.PushMsg(Msg);
+      return;
+    }
+
     if (nextDirection != Vector2.zero)
     {
       SetDirection(nextDirection);
@@ -90,5 +97,14 @@ public class Movement : MonoBehaviour
     m.V2 = rb.position;
 
     engine.SendMsg(Msg, tenMillis);
+  }
+
+  public void OnEnable()
+  {
+    Debug.Log("REACTIVA EL JUEGO");
+    if (movementMsg != null)
+    {
+      engine.SendMsg(movementMsg, gameObject, ReceiveMessage, tenMillis);
+    }
   }
 }

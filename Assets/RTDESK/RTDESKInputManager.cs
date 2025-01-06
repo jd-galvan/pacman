@@ -56,7 +56,7 @@ public class RTDESKInputManager : MonoBehaviour
   void Start()
   {
     Engine = GetComponent<RTDESKEngine>();
-    Debug.Log("Engine name " + Engine.name);
+    // Debug.Log("Engine name " + Engine.name);
   }
 
   private void sendMsg(KeyCode c, KeyState ks, MessageManager RMM)
