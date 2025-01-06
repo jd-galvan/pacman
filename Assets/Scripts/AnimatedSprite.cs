@@ -57,13 +57,6 @@ public class AnimatedSprite : MonoBehaviour
   void ReceiveMessage(MsgContent Msg)
   {
     SpriteAnimateMsg m = (SpriteAnimateMsg)Msg;
-
-    if (!m.spriteRenderer.enabled)
-    {
-      engine.PushMsg(Msg);
-      return;
-    }
-
     animationFrame++;
 
     if (animationFrame >= sprites.Length && loop)
