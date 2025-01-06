@@ -57,29 +57,37 @@ public class Pacman : MonoBehaviour
     {
       case (int)RTDESKMsgTypes.Input:
         RTDESKInputMsg IMsg = (RTDESKInputMsg)Msg;
+        Vector2 newDirection = Vector2.zero;
+
         switch (IMsg.c)
         {
           case KeyCode.UpArrow:
-            movement.SetDirection(Vector2.up);
+            newDirection = Vector2.up;
             break;
           case KeyCode.DownArrow:
-            movement.SetDirection(Vector2.down);
+            newDirection = Vector2.down;
             break;
           case KeyCode.LeftArrow:
-            movement.SetDirection(Vector2.left);
+            newDirection = Vector2.left;
             break;
           case KeyCode.RightArrow:
-            movement.SetDirection(Vector2.right);
+            newDirection = Vector2.right;
             break;
           default:
-            break;
+            return; // Salimos de la función si no es una tecla válida
         }
-        float angle = Mathf.Atan2(movement.direction.y, movement.direction.x);
-        transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
+
+        movement.SetDirection(newDirection);
+
+        // Calcular el ángulo y rotar inmediatamente
+        float angle = Mathf.Atan2(newDirection.y, newDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
         break;
       default:
         break;
     }
   }
+
 
 }
