@@ -43,14 +43,6 @@ public class GameManager : MonoBehaviour
     NewGame();
   }
 
-  private void Update()
-  {
-    if (lives <= 0 && Input.anyKeyDown)
-    {
-      NewGame();
-    }
-  }
-
   private void NewGame()
   {
     SetScore(0);

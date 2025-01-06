@@ -33,8 +33,6 @@ public class Passage : MonoBehaviour
 
   private void OnTriggerEnter2D(Collider2D other)
   {
-    Debug.Log("TUNEL " + connection.position + " " + other);
-
     TransformMsg msg = (TransformMsg)engine.PopMsg((int)UserMsgTypes.Position);
     msg.V2 = connection.position;
 
