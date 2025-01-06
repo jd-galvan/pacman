@@ -2,23 +2,6 @@ using UnityEngine;
 
 public class GhostChase : GhostBehavior
 {
-
-  private GhostEyes ghostEyesScript;
-
-  void Start()
-  {
-    // Busca el componente GhostEyes en cualquier hijo de Ghost_Blinky
-    ghostEyesScript = GetComponentInChildren<GhostEyes>();
-
-    if (ghostEyesScript != null)
-    {
-      Debug.Log("GhostEyes encontrado correctamente en " + ghostEyesScript.gameObject.name);
-    }
-    else
-    {
-      Debug.LogError("No se encontró el script GhostEyes en los hijos de Ghost_Blinky");
-    }
-  }
   private void OnDisable()
   {
     ghost.scatter.Enable();
@@ -51,7 +34,6 @@ public class GhostChase : GhostBehavior
 
       ghost.movement.SetDirection(direction);
     }
-    ghostEyesScript.ChangeEyeDirection();
   }
 
 }
