@@ -60,6 +60,7 @@ public class AnimatedSprite : MonoBehaviour
 
     if (!m.spriteRenderer.enabled)
     {
+      engine.PushMsg(Msg);
       return;
     }
 

@@ -99,11 +99,12 @@ public class Movement : MonoBehaviour
     engine.SendMsg(Msg, tenMillis);
   }
 
-  public void OnEnable()
+  private void OnEnable()
   {
-    Debug.Log("REACTIVA EL JUEGO");
     if (movementMsg != null)
     {
+      movementMsg = (TransformMsg)engine.PopMsg((int)UserMsgTypes.Speed);
+      movementMsg.V2 = rb.position;
       engine.SendMsg(movementMsg, gameObject, ReceiveMessage, tenMillis);
     }
   }
