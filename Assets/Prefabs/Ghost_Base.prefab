@@ -95,13 +95,13 @@ GameObject:
   - component: {fileID: 3259707676119580880}
   - component: {fileID: 3259707676119580893}
   - component: {fileID: -8297070990260416870}
+  - component: {fileID: 617761963837367843}
   - component: {fileID: 1631421945586648450}
   - component: {fileID: 3259707676119580883}
   - component: {fileID: 8153983311276299916}
   - component: {fileID: 7758519049117970130}
   - component: {fileID: 5207211807285900358}
   - component: {fileID: 4156890626953723852}
-  - component: {fileID: 617761963837367843}
   m_Layer: 7
   m_Name: Ghost_Base
   m_TagString: Untagged
@@ -190,6 +190,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &617761963837367843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3259707676119580887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524a90fcdc4965948a8da32ee97a788a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RTDESKEngineScript: {fileID: 0}
 --- !u!114 &1631421945586648450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,19 +294,6 @@ MonoBehaviour:
   eyes: {fileID: 7118088223020557506}
   blue: {fileID: 8182922294497502225}
   white: {fileID: 7175870383412009533}
---- !u!114 &617761963837367843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3259707676119580887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 524a90fcdc4965948a8da32ee97a788a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RTDESKEngineScript: {fileID: 0}
 --- !u!1 &5457398195424690228
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,8 +304,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7009079057891395267}
   - component: {fileID: 8182922294497502225}
-  - component: {fileID: 2703408331179623121}
   - component: {fileID: 3019810028694767923}
+  - component: {fileID: 2703408331179623121}
   m_Layer: 7
   m_Name: Blue
   m_TagString: Untagged
@@ -380,6 +380,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3019810028694767923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5457398195424690228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524a90fcdc4965948a8da32ee97a788a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RTDESKEngineScript: {fileID: 0}
 --- !u!114 &2703408331179623121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,19 +409,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7031ccde0b7585f4593ec9ccd2626e05, type: 3}
   - {fileID: 21300000, guid: d5e15c75b88558b469ecc97990cce215, type: 3}
   loop: 1
---- !u!114 &3019810028694767923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5457398195424690228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 524a90fcdc4965948a8da32ee97a788a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RTDESKEngineScript: {fileID: 0}
 --- !u!1 &8258949897259618613
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,8 +419,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8108492307570935671}
   - component: {fileID: 6337672407132840256}
-  - component: {fileID: 4754998162861572984}
   - component: {fileID: 2923140148399342689}
+  - component: {fileID: 4754998162861572984}
   m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
@@ -495,6 +495,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2923140148399342689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258949897259618613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524a90fcdc4965948a8da32ee97a788a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RTDESKEngineScript: {fileID: 0}
 --- !u!114 &4754998162861572984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,19 +524,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: afc3b534b8a93544984cf1676ba61ae4, type: 3}
   - {fileID: 21300000, guid: 6f51e42bf59063c4ab7a5608a42bd23d, type: 3}
   loop: 1
---- !u!114 &2923140148399342689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8258949897259618613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 524a90fcdc4965948a8da32ee97a788a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RTDESKEngineScript: {fileID: 0}
 --- !u!1 &8402458858377581156
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,8 +534,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6183463068272012111}
   - component: {fileID: 7175870383412009533}
-  - component: {fileID: 5272674126107970678}
   - component: {fileID: 1530345683125486844}
+  - component: {fileID: 5272674126107970678}
   m_Layer: 7
   m_Name: White
   m_TagString: Untagged
@@ -610,6 +610,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1530345683125486844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402458858377581156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524a90fcdc4965948a8da32ee97a788a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RTDESKEngineScript: {fileID: 0}
 --- !u!114 &5272674126107970678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,16 +641,3 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a66fca21a2eaf43459e2fbb561e630d6, type: 3}
   - {fileID: 21300000, guid: 0046507bc33d04343a6bcbf90288aff2, type: 3}
   loop: 1
---- !u!114 &1530345683125486844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8402458858377581156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 524a90fcdc4965948a8da32ee97a788a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RTDESKEngineScript: {fileID: 0}
