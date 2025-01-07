@@ -26,6 +26,7 @@ public class Passage : MonoBehaviour
   private void Awake()
   {
     pacmanManagerMailBox = RTDESKEntity.getMailBox("Pacman");
+    pacmanManagerMailBox = RTDESKEntity.getMailBox("Pacman2");
     ghostBlinky1ManagerMailBox = RTDESKEntity.getMailBox("Ghost_Blinky");
     ghostInky1ManagerMailBox = RTDESKEntity.getMailBox("Ghost_Inky");
     ghostPinky1ManagerMailBox = RTDESKEntity.getMailBox("Ghost_Pinky");
@@ -52,6 +53,9 @@ public class Passage : MonoBehaviour
     switch (other.gameObject.name)
     {
       case "Pacman":
+        engine.SendMsg(msg, gameObject, pacmanManagerMailBox, HRTimer.HRT_INMEDIATELY);
+        break;
+      case "Pacman2":
         engine.SendMsg(msg, gameObject, pacmanManagerMailBox, HRTimer.HRT_INMEDIATELY);
         break;
       case "Ghost_Blinky":
