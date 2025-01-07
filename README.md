@@ -3,30 +3,41 @@
 
 Por José Daniel Galván & Joshua Diaz
 
-
+## Previo
+Por favor emplear versión 2022.3.45f1 de Unity Editor para poder trabajar correctamente con este proyecto
 
 ## Introducción
-Bienvenido a **Pac-Man 2D**, un juego clásico de arcade desarrollado en Unity. En este juego, controlarás a Pac-Man mientras recorre un laberinto, come puntos y evita a los fantasmas.
+Bienvenido a **Pac-Man 2D**, un juego clásico de arcade desarrollado en Unity. En este juego, controlarás a Pac-Man  en un modo colaborativo de dos jugadores mientras recorren un laberinto, comen puntos y evitan a los fantasmas. ¡Obtén el mayor puntaje!
 
 ## Instalación
 1. Abre el proyecto en el editor de Unity.
-2. Abre la escena llamada Pacman.
-3. Ejecuta "Play" a la escena.
+2. Verifica que Unity realice la carga correcta de todos los componentes de estas fuentes
+3. Abre la escena llamada Inicio.
+4. Ejecuta "Play" a la escena.
 
-## Controles
-- **Flecha Arriba**: Mover hacia arriba
-- **Flecha Abajo**: Mover hacia abajo
-- **Flecha Izquierda**: Mover hacia la izquierda
-- **Flecha Derecha**: Mover hacia la derecha
+## Controles, multijugador:
+
+### jugador 1
+- **Tecla Flecha Arriba**: Mover hacia arriba
+- **Tecla Flecha Abajo**: Mover hacia abajo
+- **Tecla Flecha Izquierda**: Mover hacia la izquierda
+- **Tecla Flecha Derecha**: Mover hacia la derecha
+
+### jugador 2
+- **Tecla W**: Mover hacia arriba
+- **Tecla S**: Mover hacia abajo
+- **Tecla A**: Mover hacia la izquierda
+- **Tecla D**: Mover hacia la derecha
 
 ## Objetivo del Juego
 El objetivo del juego es simple:
 - Recoge todos los puntos en el laberinto para ganar.
+- Acumula puntos y obten el mayor posible
 - Evita a los fantasmas que patrullan el laberinto.
 - Come las "píldoras de poder" para volver vulnerables a los fantasmas temporalmente y poder devorarlos.
 
 ## Elementos del Juego
-- **Pac-Man**: El personaje principal, controlado por el jugador.
+- **Pac-Man**: El personaje principal, controlado por los jugadores.
 - **Fantasmas**: Enemigos que intentan atrapar a Pac-Man. Existen diferentes tipos con comportamientos distintos.
 - **Puntos**: Pequeñas bolas distribuidas en el laberinto que Pac-Man debe comer para ganar puntos.
 - **Píldoras de Poder**: Permiten a Pac-Man comerse a los fantasmas durante un tiempo limitado.
