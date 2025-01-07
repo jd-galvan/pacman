@@ -10,6 +10,11 @@ public class Pacman : MonoBehaviour
   private RTDESKEngine engine; ///< Motor RTDESK para la gestión de eventos y entradas.
   // FIN RTDESK 
 
+  [SerializeField] private KeyCode upKey = KeyCode.UpArrow; ///< Referencia tecla arriba.
+  [SerializeField] private KeyCode downKey = KeyCode.DownArrow; ///< Referencia tecla abajo.
+  [SerializeField] private KeyCode leftKey = KeyCode.LeftArrow; ///< Referencia tecla izquierda.
+  [SerializeField] private KeyCode rightKey = KeyCode.RightArrow; ///< Referencia tecla derecha.
+
   [SerializeField]
   private AnimatedSprite deathSequence; ///< Animación de muerte de Pacman.
   private SpriteRenderer spriteRenderer; ///< Componente de renderizado de sprite.
@@ -35,10 +40,10 @@ public class Pacman : MonoBehaviour
     RTDESKInputManager IM = engine.GetInputManager();
 
     // Registrar las teclas de dirección para capturar la entrada del usuario
-    IM.RegisterKeyCode(ReceiveMessage, KeyCode.UpArrow);
-    IM.RegisterKeyCode(ReceiveMessage, KeyCode.DownArrow);
-    IM.RegisterKeyCode(ReceiveMessage, KeyCode.LeftArrow);
-    IM.RegisterKeyCode(ReceiveMessage, KeyCode.RightArrow);
+    IM.RegisterKeyCode(ReceiveMessage, upKey);
+    IM.RegisterKeyCode(ReceiveMessage, downKey);
+    IM.RegisterKeyCode(ReceiveMessage, leftKey);
+    IM.RegisterKeyCode(ReceiveMessage, rightKey);
   }
 
   /// <summary>
@@ -81,16 +86,16 @@ public class Pacman : MonoBehaviour
 
         switch (IMsg.c)
         {
-          case KeyCode.UpArrow:
+          case var key when key == upKey:
             newDirection = Vector2.up;
             break;
-          case KeyCode.DownArrow:
+          case var key when key == downKey:
             newDirection = Vector2.down;
             break;
-          case KeyCode.LeftArrow:
+          case var key when key == leftKey:
             newDirection = Vector2.left;
             break;
-          case KeyCode.RightArrow:
+          case var key when key == rightKey:
             newDirection = Vector2.right;
             break;
           default:

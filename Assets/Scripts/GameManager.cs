@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
   [SerializeField] private RTDESKEngine engine; ///< Referencia al motor RTDESK.
   [SerializeField] private Ghost[] ghosts; ///< Lista de fantasmas en el juego.
-  [SerializeField] private Pacman pacman; ///< Referencia a Pacman.
+  [SerializeField] public Pacman[] pacmans; ///< Referencia a Pacmans.
   [SerializeField] private Transform pellets; ///< Contenedor de las bolitas del juego.
   [SerializeField] private Text gameOverText; ///< Texto que se muestra cuando el juego termina.
   [SerializeField] private Text scoreText; ///< Texto de la puntuación.
@@ -90,8 +90,10 @@ public class GameManager : MonoBehaviour
     {
       ghosts[i].ResetState();
     }
-
-    pacman.ResetState();
+    for (int i = 0; i < pacmans.Length; i++)
+    {
+      pacmans[i].ResetState();
+    }
   }
 
   /// <summary>
@@ -106,7 +108,10 @@ public class GameManager : MonoBehaviour
       ghosts[i].gameObject.SetActive(false);
     }
 
-    pacman.gameObject.SetActive(false);
+    for (int i = 0; i < pacmans.Length; i++)
+    {
+      pacmans[i].ResetState();
+    }
     engine.gameObject.SetActive(false);
   }
 
@@ -131,9 +136,9 @@ public class GameManager : MonoBehaviour
   /// <summary>
   /// Método llamado cuando Pacman es comido por un fantasma.
   /// </summary>
-  public void PacmanEaten()
+  public void PacmanEaten(Pacman pacmanEaten)
   {
-    pacman.DeathSequence();
+    pacmanEaten.DeathSequence();
 
     SetLives(lives - 1);
 
@@ -169,7 +174,10 @@ public class GameManager : MonoBehaviour
 
     if (!HasRemainingPellets())
     {
-      pacman.gameObject.SetActive(false);
+      for (int i = 0; i < pacmans.Length; i++)
+      {
+        pacmans[i].gameObject.SetActive(false);
+      }
       Invoke(nameof(NewRound), 3f);
     }
   }
