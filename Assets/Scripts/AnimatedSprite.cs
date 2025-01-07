@@ -75,6 +75,12 @@ public class AnimatedSprite : MonoBehaviour
   /// <param name="Msg">Mensaje recibido con el contenido de animación.</param>
   private void ReceiveMessage(MsgContent Msg)
   {
+    if (!this.enabled)
+    {
+      engine.PushMsg(Msg);
+      return;
+    }
+
     SpriteAnimateMsg m = (SpriteAnimateMsg)Msg;
     animationFrame++;
 
