@@ -3,20 +3,26 @@ using HRT_Time = System.Int64;
 
 using UnityEngine;
 
+/// <summary>
+/// Gestiona el comportamiento de los pasajes en el juego, permitiendo a Pacman y los fantasmas teletransportarse entre posiciones.
+/// </summary>
 [RequireComponent(typeof(Collider2D))]
 public class Passage : MonoBehaviour
 {
-  HRT_Time userTime;
-  HRT_Time oneSecond, halfSecond, tenMillis;
-  RTDESKEngine engine;
-  MessageManager pacmanManagerMailBox,
-                ghostBlinky1ManagerMailBox,
-                ghostInky1ManagerMailBox,
-                ghostPinky1ManagerMailBox,
-                ghostClyde1ManagerMailBox;
+  private HRT_Time userTime;
+  private HRT_Time oneSecond, halfSecond, tenMillis;
+  private RTDESKEngine engine;
+  private MessageManager pacmanManagerMailBox,
+                        ghostBlinky1ManagerMailBox,
+                        ghostInky1ManagerMailBox,
+                        ghostPinky1ManagerMailBox,
+                        ghostClyde1ManagerMailBox;
 
-  public Transform connection;
+  public Transform connection; ///< Punto de conexión al otro lado del pasaje.
 
+  /// <summary>
+  /// Inicializa los buzones de mensajes de cada entidad relevante del juego.
+  /// </summary>
   private void Awake()
   {
     pacmanManagerMailBox = RTDESKEntity.getMailBox("Pacman");
@@ -26,11 +32,18 @@ public class Passage : MonoBehaviour
     ghostClyde1ManagerMailBox = RTDESKEntity.getMailBox("Ghost_Clyde");
   }
 
+  /// <summary>
+  /// Obtiene la referencia al motor RTDESK al inicio del juego.
+  /// </summary>
   private void Start()
   {
     engine = GetComponent<RTDESKEntity>().RTDESKEngineScript;
   }
 
+  /// <summary>
+  /// Maneja la teletransportación de Pacman y los fantasmas al cruzar el pasaje.
+  /// </summary>
+  /// <param name="other">Objeto que entra en contacto con el pasaje.</param>
   private void OnTriggerEnter2D(Collider2D other)
   {
     TransformMsg msg = (TransformMsg)engine.PopMsg((int)UserMsgTypes.Position);
@@ -57,5 +70,4 @@ public class Passage : MonoBehaviour
         break;
     }
   }
-
 }

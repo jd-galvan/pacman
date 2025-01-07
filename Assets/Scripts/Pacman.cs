@@ -1,18 +1,24 @@
 using UnityEngine;
 
+/// <summary>
+/// Controla el comportamiento de Pacman, incluyendo su movimiento, colisiones y la secuencia de muerte.
+/// </summary>
 [RequireComponent(typeof(Movement))]
 public class Pacman : MonoBehaviour
 {
   // RTDESK 
-  RTDESKEngine engine;
+  private RTDESKEngine engine; ///< Motor RTDESK para la gestión de eventos y entradas.
   // FIN RTDESK 
 
   [SerializeField]
-  private AnimatedSprite deathSequence;
-  private SpriteRenderer spriteRenderer;
-  private CircleCollider2D circleCollider;
-  private Movement movement;
+  private AnimatedSprite deathSequence; ///< Animación de muerte de Pacman.
+  private SpriteRenderer spriteRenderer; ///< Componente de renderizado de sprite.
+  private CircleCollider2D circleCollider; ///< Colisionador circular de Pacman.
+  private Movement movement; ///< Componente de movimiento de Pacman.
 
+  /// <summary>
+  /// Inicializa los componentes internos.
+  /// </summary>
   private void Awake()
   {
     spriteRenderer = GetComponent<SpriteRenderer>();
@@ -20,17 +26,24 @@ public class Pacman : MonoBehaviour
     movement = GetComponent<Movement>();
   }
 
+  /// <summary>
+  /// Configura la entrada de usuario mediante RTDESK.
+  /// </summary>
   private void Start()
   {
     engine = GetComponent<RTDESKEntity>().RTDESKEngineScript;
     RTDESKInputManager IM = engine.GetInputManager();
 
-    //Register keys that we want to be signaled in case the user press them
+    // Registrar las teclas de dirección para capturar la entrada del usuario
     IM.RegisterKeyCode(ReceiveMessage, KeyCode.UpArrow);
     IM.RegisterKeyCode(ReceiveMessage, KeyCode.DownArrow);
     IM.RegisterKeyCode(ReceiveMessage, KeyCode.LeftArrow);
     IM.RegisterKeyCode(ReceiveMessage, KeyCode.RightArrow);
   }
+
+  /// <summary>
+  /// Reinicia el estado de Pacman para un nuevo juego o ronda.
+  /// </summary>
   public void ResetState()
   {
     enabled = true;
@@ -41,6 +54,9 @@ public class Pacman : MonoBehaviour
     gameObject.SetActive(true);
   }
 
+  /// <summary>
+  /// Inicia la secuencia de muerte de Pacman, deshabilitando su control y activando la animación.
+  /// </summary>
   public void DeathSequence()
   {
     enabled = false;
@@ -51,6 +67,10 @@ public class Pacman : MonoBehaviour
     deathSequence.Restart();
   }
 
+  /// <summary>
+  /// Maneja los mensajes recibidos por RTDESK, principalmente las entradas del usuario.
+  /// </summary>
+  /// <param name="Msg">Mensaje recibido.</param>
   private void ReceiveMessage(MsgContent Msg)
   {
     switch (Msg.Type)
@@ -79,7 +99,7 @@ public class Pacman : MonoBehaviour
 
         movement.SetDirection(newDirection);
 
-        // Calcular el ángulo y rotar inmediatamente
+        // Calcula el ángulo y rota inmediatamente Pacman en la dirección correcta
         float angle = Mathf.Atan2(newDirection.y, newDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
