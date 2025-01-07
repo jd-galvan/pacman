@@ -1,8 +1,46 @@
-# Pac-man (2D)
+# Manual de Usuario - Pac-Man 2D con RTDESK en Unity
+**Basado en** https://github.com/zigurous/unity-pacman-tutorial
 
-> Pac-Man is a maze action game developed and released by Namco for arcades in 1980. The player controls Pac-Man, who must eat all the dots inside an enclosed maze while avoiding four colored ghosts. Eating large flashing dots called "Power Pellets" causes the ghosts to turn blue, allowing Pac-Man to eat them for bonus points.
+Por José Daniel Galván & Joshua Diaz
 
-- **Topics**: AI, Tilemaps, Sprites
-- **Version**: Unity 2021.3 (LTS)
-- [**Download**](https://github.com/zigurous/unity-pacman-tutorial/archive/refs/heads/main.zip)
-- [**Watch Video**](https://youtu.be/TKt_VlMn_aA)
+
+
+## Introducción
+Bienvenido a **Pac-Man 2D**, un juego clásico de arcade desarrollado en Unity. En este juego, controlarás a Pac-Man mientras recorre un laberinto, come puntos y evita a los fantasmas.
+
+## Instalación
+1. Abre el proyecto en el editor de Unity.
+2. Abre la escena llamada Pacman.
+3. Ejecuta "Play" a la escena.
+
+## Controles
+- **Flecha Arriba**: Mover hacia arriba
+- **Flecha Abajo**: Mover hacia abajo
+- **Flecha Izquierda**: Mover hacia la izquierda
+- **Flecha Derecha**: Mover hacia la derecha
+
+## Objetivo del Juego
+El objetivo del juego es simple:
+- Recoge todos los puntos en el laberinto para ganar.
+- Evita a los fantasmas que patrullan el laberinto.
+- Come las "píldoras de poder" para volver vulnerables a los fantasmas temporalmente y poder devorarlos.
+
+## Elementos del Juego
+- **Pac-Man**: El personaje principal, controlado por el jugador.
+- **Fantasmas**: Enemigos que intentan atrapar a Pac-Man. Existen diferentes tipos con comportamientos distintos.
+- **Puntos**: Pequeñas bolas distribuidas en el laberinto que Pac-Man debe comer para ganar puntos.
+- **Píldoras de Poder**: Permiten a Pac-Man comerse a los fantasmas durante un tiempo limitado.
+
+## Puntuación
+- Punto normal: **10 puntos**
+- Píldora de poder: **50 puntos**
+- Fantasma devorado: **200, 400, 800, 1600 puntos (dependiendo del orden en que sean comidos)**
+
+## Créditos
+Desarrollado por: **[Tu Nombre o Nombre del Estudio]**
+Arte y Sonido: **[Menciones a colaboradores si aplica]**
+
+## Contacto
+Si tienes dudas, comentarios o sugerencias, puedes contactarnos en **[correo electrónico o redes sociales]**.
+
+¡Esperamos que disfrutes jugando Pac-Man 2D!
