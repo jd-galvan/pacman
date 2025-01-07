@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
   public static GameManager Instance { get; private set; }
 
+  [SerializeField] private RTDESKEngine engine; ///< Referencia al motor RTDESK.
   [SerializeField] private Ghost[] ghosts; ///< Lista de fantasmas en el juego.
   [SerializeField] private Pacman pacman; ///< Referencia a Pacman.
   [SerializeField] private Transform pellets; ///< Contenedor de las bolitas del juego.
@@ -106,6 +107,7 @@ public class GameManager : MonoBehaviour
     }
 
     pacman.gameObject.SetActive(false);
+    engine.gameObject.SetActive(false);
   }
 
   /// <summary>
