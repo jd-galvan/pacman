@@ -3,8 +3,10 @@
 
 Por José Daniel Galván & Joshua Diaz
 
-## Previo
-Por favor emplear versión 2022.3.45f1 de Unity Editor para poder trabajar correctamente con este proyecto
+**Asignatura**: Motores de Videojuegos
+
+## Requerimientos
+Por favor emplear versión 2022.3.45f1 de Unity Editor para poder trabajar correctamente con este proyecto.
 
 ## Introducción
 Bienvenido a **Pac-Man 2D**, un juego clásico de arcade desarrollado en Unity. En este juego, controlarás a Pac-Man  en un modo colaborativo de dos jugadores mientras recorren un laberinto, comen puntos y evitan a los fantasmas. ¡Obtén el mayor puntaje!
@@ -12,7 +14,7 @@ Bienvenido a **Pac-Man 2D**, un juego clásico de arcade desarrollado en Unity. 
 ## Instalación
 1. Abre el proyecto en el editor de Unity.
 2. Verifica que Unity realice la carga correcta de todos los componentes de estas fuentes
-3. Abre la escena llamada Inicio.
+3. Abre la escena llamada **Inicio**.
 4. Ejecuta "Play" a la escena.
 
 ## Controles, multijugador:
@@ -47,11 +49,14 @@ El objetivo del juego es simple:
 - Píldora de poder: **50 puntos**
 - Fantasma devorado: **200, 400, 800, 1600 puntos (dependiendo del orden en que sean comidos)**
 
-## Créditos
-Desarrollado por: **[Tu Nombre o Nombre del Estudio]**
-Arte y Sonido: **[Menciones a colaboradores si aplica]**
 
-## Contacto
-Si tienes dudas, comentarios o sugerencias, puedes contactarnos en **[correo electrónico o redes sociales]**.
+## RTDESK
+En el presente proyecto se ha implementado el paquete RTDESK para la ejecución de actualización discreta desacoplada. 
 
-¡Esperamos que disfrutes jugando Pac-Man 2D!
+Se implementaron 3 tipos de eventos:
+- Pacman utiliza la clase InputManager para la captura de eventos del teclado, con lo cual se evita que esa validación de lectura se repita por cada frame en el método Update.
+- Los scripts Movement y AnimatedSprite se envían mensajes a sí mismos para la ejecución continua del movimiento y animación del sprite respectivamente.
+- El script Passage, al detectar una colisión, envía un mensage a Pacman o al fantasma que colisionó con el tunel lateral para que el GameObject que colisionó, cambie de posición y se simule la "teletransportación" hacia el tunel lateral del lado contrario.
+
+
+*¡Esperamos que disfrutes jugando Pac-Man 2D!*
