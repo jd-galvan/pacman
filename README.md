@@ -51,7 +51,7 @@ El objetivo del juego es simple:
 
 
 ## RTDESK
-En el presente proyecto se ha implementado el paquete RTDESK para la ejecución de actualización discreta desacoplada. 
+En el presente proyecto se ha implementado el paquete RTDESK para la ejecución de simulación discreta desacoplada. 
 
 Se implementaron 3 tipos de eventos:
 - Pacman utiliza la clase InputManager para la captura de eventos del teclado, con lo cual se evita que esa validación de lectura se repita por cada frame en el método Update.
