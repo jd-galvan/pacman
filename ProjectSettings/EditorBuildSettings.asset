@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pacman.unity
     guid: 702329e82cfc4fd498b126dce25de9ff
+  - enabled: 1
+    path: Assets/Scenes/Puntaje.unity
+    guid: a911f20e632c3c84c9d12412df83a7f2
   m_configObjects: {}

@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 /// <summary>
 /// Administra la lógica general del juego, incluyendo puntuación, vidas y el estado de los personajes.
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
   public int score { get; private set; } = 0; ///< Puntuación actual.
   public int lives { get; private set; } = 3; ///< Cantidad de vidas restantes.
 
+  public static int finalScore = 0; ///< marcador final.
   private int ghostMultiplier = 1; ///< Multiplicador de puntos por fantasma.
 
   /// <summary>
@@ -113,6 +116,8 @@ public class GameManager : MonoBehaviour
       pacmans[i].ResetState();
     }
     engine.gameObject.SetActive(false);
+    finalScore = score; ///< Guarda el puntaje actual en la variable estática.
+    SceneManager.LoadScene(2);
   }
 
   /// <summary>
