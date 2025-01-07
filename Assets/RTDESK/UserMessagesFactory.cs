@@ -9,7 +9,7 @@
  * @Date:	11/2022
  * @Version: 2.0
  *
- * Update:
+ * Update: 07.01.2025
  * Date:	
  * Version: 
  * Changes:
@@ -39,7 +39,6 @@ using UnityEngine;
 
 public enum RTDESKMsgTypes
 {
-  Test, //For testing purposes anywhere
   Input,  //Input Manager message
   RTDESK_MAX_MsgTypes
 };
@@ -74,36 +73,10 @@ public class SpriteAnimateMsg : MsgContent
   public SpriteAnimateMsg() { Type = (int)UserMsgTypes.Animation; }
 }
 
-//Examples of different types of messages to interchange among different GameObjects
-public class ObjectMsg : MsgContent
-{
-  public GameObject o;
-
-  public ObjectMsg() { Type = (int)UserMsgTypes.Object; }
-}
-
-//Translaci�n, Rotaci�n y Escala
-public class TRE : MsgContent
-{
-  public Vector3 pos, rot, esc;
-
-  public override string ToString() => pos.ToString() + " " + rot.ToString() + " " + esc.ToString();
-
-  public TRE() { Type = (int)UserMsgTypes.TRE; }
-}
-
-public class Action : MsgContent
-{
-  public int action;
-  public override string ToString() => action.ToString();
-
-  public Action() { Type = (int)UserMsgTypes.Action; }
-}
-
 public enum UserMsgTypes
 {
   Position = RTDESKMsgTypes.RTDESK_MAX_MsgTypes,  //The first enumerated user message type is the last used by the RTDESK system
-  Rotation, Scale, TRE, Speed, Action, Animation, Object, TotalAmountUserMsgTypes
+  Speed, Animation, Action, TotalAmountUserMsgTypes
 };
 
 public enum UserActions
@@ -131,26 +104,11 @@ public class UserMessagesFactory
       case (int)RTDESKMsgTypes.Input:
         msg = new RTDESKInputMsg();
         break;
-      case (int)UserMsgTypes.Object:
-        msg = new ObjectMsg();
-        break;
       case (int)UserMsgTypes.Position:
         msg = new TransformMsg();
         break;
-      case (int)UserMsgTypes.Rotation:
-        msg = new TransformMsg();
-        break;
-      case (int)UserMsgTypes.Scale:
-        msg = new TransformMsg();
-        break;
-      case (int)UserMsgTypes.TRE:
-        msg = new TRE();
-        break;
       case (int)UserMsgTypes.Speed:
         msg = new TransformMsg();
-        break;
-      case (int)UserMsgTypes.Action:
-        msg = new Action();
         break;
       case (int)UserMsgTypes.Animation:
         msg = new SpriteAnimateMsg();
