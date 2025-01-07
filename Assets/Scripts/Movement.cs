@@ -106,11 +106,6 @@ public class Movement : MonoBehaviour
         engine.SendMsg(Msg, tenMillis);
         break;
     }
-
-
-
-
-
   }
 
   private void OnEnable()
