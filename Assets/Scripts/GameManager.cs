@@ -6,17 +6,23 @@ public class GameManager : MonoBehaviour
 {
   public static GameManager Instance { get; private set; }
 
-  [SerializeField] private Ghost[] ghosts;
+  [SerializeField] private Ghost[] ghosts1;
+  [SerializeField] private Ghost[] ghosts2;
   [SerializeField] private Pacman pacman1;
   [SerializeField] private Pacman pacman2;
   [SerializeField] private Transform pellets;
-  [SerializeField] private Text scoreText;
-  [SerializeField] private Text livesText;
+  [SerializeField] private Text scoreText1;
+  [SerializeField] private Text scoreText2;
+  [SerializeField] private Text livesText1;
+  [SerializeField] private Text livesText2;
 
-  public int score { get; private set; } = 0;
-  public int lives { get; private set; } = 3;
+  public int score1 { get; private set; } = 0;
+  public int score2 { get; private set; } = 0;
+  public int lives1 { get; private set; } = 3;
+  public int lives2 { get; private set; } = 3;
 
-  private int ghostMultiplier = 1;
+  private int ghostMultiplier1 = 1;
+  private int ghostMultiplier2 = 1;
 
   private void Awake()
   {
@@ -45,7 +51,7 @@ public class GameManager : MonoBehaviour
 
   private void Update()
   {
-    if (lives <= 0 && Input.anyKeyDown)
+    if (lives1 <= 0 && Input.anyKeyDown)
     {
       NewGame();
     }
@@ -53,8 +59,8 @@ public class GameManager : MonoBehaviour
 
   private void NewGame()
   {
-    SetScore(0);
-    SetLives(3);
+    SetScore(0, 0);
+    SetLives(3, 0);
     NewRound();
   }
 
@@ -66,53 +72,103 @@ public class GameManager : MonoBehaviour
       pellet.gameObject.SetActive(true);
     }
 
-    ResetState();
+    ResetStatePlayer1();
+    ResetStatePlayer2();
   }
 
-  private void ResetState()
+  private void ResetStatePlayer1()
   {
-    for (int i = 0; i < ghosts.Length; i++)
+    for (int i = 0; i < ghosts1.Length; i++)
     {
-      ghosts[i].ResetState();
+      ghosts1[i].ResetState();
     }
 
     pacman1.ResetState();
+  }
+
+  private void ResetStatePlayer2()
+  {
+    for (int i = 0; i < ghosts2.Length; i++)
+    {
+      ghosts2[i].ResetState();
+    }
+
     pacman2.ResetState();
   }
 
   private void GameOver()
   {
-    for (int i = 0; i < ghosts.Length; i++)
+    for (int i = 0; i < ghosts1.Length; i++)
     {
-      ghosts[i].gameObject.SetActive(false);
+      ghosts1[i].gameObject.SetActive(false);
     }
 
     pacman1.gameObject.SetActive(false);
     pacman2.gameObject.SetActive(false);
   }
 
-  private void SetLives(int lives)
+  private void SetLives(int lives, int player)
   {
-    this.lives = lives;
-    livesText.text = "x" + lives.ToString();
-  }
-
-  private void SetScore(int score)
-  {
-    this.score = score;
-    scoreText.text = score.ToString().PadLeft(2, '0');
-  }
-
-  public void PacmanEaten()
-  {
-    pacman1.DeathSequence();
-    pacman2.DeathSequence();
-
-    SetLives(lives - 1);
-
-    if (lives > 0)
+    switch (player)
     {
-      Invoke(nameof(ResetState), 3f);
+      case 1:
+        this.lives1 = lives;
+        livesText1.text = "x" + lives.ToString();
+        break;
+      case 2:
+        this.lives2 = lives;
+        livesText2.text = "x" + lives.ToString();
+        break;
+      default:
+        this.lives1 = lives;
+        livesText1.text = "x" + lives.ToString();
+        this.lives2 = lives;
+        livesText2.text = "x" + lives.ToString();
+        break;
+    }
+  }
+
+  private void SetScore(int score, int p)
+  {
+    switch (p)
+    {
+      case 1:
+        this.score1 = score;
+        scoreText1.text = score.ToString().PadLeft(2, '0');
+        break;
+      case 2:
+        this.score2 = score;
+        scoreText2.text = score.ToString().PadLeft(2, '0');
+        break;
+      default:
+        this.score1 = score;
+        scoreText1.text = score.ToString().PadLeft(2, '0');
+        this.score2 = score;
+        scoreText2.text = score.ToString().PadLeft(2, '0');
+        break;
+    }
+  }
+
+  public void PacmanEaten(GameObject pacman)
+  {
+    if (pacman.name == "Pacman_1")
+    {
+      pacman1.DeathSequence();
+      SetLives(lives1 - 1, 1);
+    }
+    else if (pacman.name == "Pacman_2")
+    {
+      pacman2.DeathSequence();
+      SetLives(lives2 - 1, 2);
+    }
+
+    if (lives1 > 0)
+    {
+      Invoke(nameof(ResetStatePlayer1), 3f);
+    }
+    else if (lives2 > 0)
+    {
+      Invoke(nameof(ResetStatePlayer2), 3f);
     }
     else
     {
@@ -120,38 +176,73 @@ public class GameManager : MonoBehaviour
     }
   }
 
-  public void GhostEaten(Ghost ghost)
+  public void GhostEaten(Ghost ghost, GameObject pacman)
   {
-    int points = ghost.points * ghostMultiplier;
-    SetScore(score + points);
 
-    ghostMultiplier++;
+    if (pacman.name == "Pacman_1")
+    {
+      int points = ghost.points * ghostMultiplier1;
+      SetScore(score1 + points, 1);
+      ghostMultiplier1++;
+    }
+    else if (pacman.name == "Pacman_2")
+    {
+      int points = ghost.points * ghostMultiplier2;
+      SetScore(score2 + points, 2);
+      ghostMultiplier2++;
+    }
+
   }
 
-  public void PelletEaten(Pellet pellet)
+  public void PelletEaten(Pellet pellet, GameObject pacman)
   {
     pellet.gameObject.SetActive(false);
 
-    SetScore(score + pellet.points);
-
-    if (!HasRemainingPellets())
+    if (pacman.name == "Pacman_1")
     {
-      pacman1.gameObject.SetActive(false);
-      pacman2.gameObject.SetActive(false);
-      Invoke(nameof(NewRound), 3f);
+      SetScore(score1 + pellet.points, 1);
+      if (!HasRemainingPellets())
+      {
+        pacman1.gameObject.SetActive(false);
+        Invoke(nameof(NewRound), 3f);
+      }
     }
+    else if (pacman.name == "Pacman_2")
+    {
+      SetScore(score2 + pellet.points, 2);
+      if (!HasRemainingPellets())
+      {
+        pacman2.gameObject.SetActive(false);
+        Invoke(nameof(NewRound), 3f);
+      }
+    }
+
   }
 
-  public void PowerPelletEaten(PowerPellet pellet)
+  public void PowerPelletEaten(PowerPellet pellet, GameObject pacman)
   {
-    for (int i = 0; i < ghosts.Length; i++)
+    if (pacman.name == "Pacman_1")
     {
-      ghosts[i].frightened.Enable(pellet.duration);
-    }
+      for (int i = 0; i < ghosts1.Length; i++)
+      {
+        ghosts1[i].frightened.Enable(pellet.duration);
+      }
 
-    PelletEaten(pellet);
-    CancelInvoke(nameof(ResetGhostMultiplier));
-    Invoke(nameof(ResetGhostMultiplier), pellet.duration);
+      PelletEaten(pellet, pacman);
+      CancelInvoke(nameof(ResetGhostMultiplier1));
+      Invoke(nameof(ResetGhostMultiplier1), pellet.duration);
+    }
+    else if (pacman.name == "Pacman_2")
+    {
+      for (int i = 0; i < ghosts2.Length; i++)
+      {
+        ghosts2[i].frightened.Enable(pellet.duration);
+      }
+
+      PelletEaten(pellet, pacman);
+      CancelInvoke(nameof(ResetGhostMultiplier2));
+      Invoke(nameof(ResetGhostMultiplier2), pellet.duration);
+    }
   }
 
   private bool HasRemainingPellets()
@@ -167,9 +258,14 @@ public class GameManager : MonoBehaviour
     return false;
   }
 
-  private void ResetGhostMultiplier()
+  private void ResetGhostMultiplier1()
   {
-    ghostMultiplier = 1;
+    ghostMultiplier1 = 1;
+  }
+
+  private void ResetGhostMultiplier2()
+  {
+    ghostMultiplier2 = 2;
   }
 
 }

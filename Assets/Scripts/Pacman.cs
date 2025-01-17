@@ -40,8 +40,6 @@ public class Pacman : MonoBehaviour
     enabled = true;
     spriteRenderer.enabled = true;
     circleCollider.enabled = true;
-    Debug.Log("ENTRO AQUI");
-    Debug.Log(deathSequence);
     deathSequence.enabled = false;
     movement.ResetState();
     gameObject.SetActive(true);

@@ -3,18 +3,19 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Pellet : MonoBehaviour
 {
-    public int points = 10;
+  public int points = 10;
 
-    protected virtual void Eat()
-    {
-        GameManager.Instance.PelletEaten(this);
-    }
+  protected virtual void Eat(GameObject p)
+  {
+    GameManager.Instance.PelletEaten(this, p);
+  }
 
-    private void OnTriggerEnter2D(Collider2D other)
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.layer == LayerMask.NameToLayer("Pacman"))
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pacman")) {
-            Eat();
-        }
+      Eat(other.gameObject);
     }
+  }
 
 }
